@@ -35,4 +35,8 @@ public class AdviceService {
         return person.orElseThrow(() -> new AdviceException("Person with PAN " + panno + " not found"));
     }
 
+    public List<Person> getPersonList(){
+        return personList;
+    }
+
 }

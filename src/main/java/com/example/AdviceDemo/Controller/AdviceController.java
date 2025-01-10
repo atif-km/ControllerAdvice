@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -40,16 +41,12 @@ public class AdviceController {
       return ResponseEntity.status(HttpStatus.OK).body(p);
     }
 
-
-
-    @ExceptionHandler(AdviceException.class)
-    public ResponseEntity<Object> handleAdviceException(AdviceException ex)
-    {
-        System.out.println("In exception handler");
-
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setCode(HttpStatus.NOT_FOUND.value());
-        errorResponse.setMessage(ex.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    @GetMapping(value = "/res/personlist")
+    public ResponseEntity<List<Person>> getPersponList(){
+        adviceService.getPersonList();
+        return  ResponseEntity.status(HttpStatus.OK).body(adviceService.getPersonList());
     }
+
+
+
 }
